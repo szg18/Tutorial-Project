@@ -1,12 +1,30 @@
 <html>
     <head>
         <title>Overwatch Information</title>
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
         <style>
+            a {
+                cursor:help;
+                text-decoration:none;
+                transition:all 0.5s ease-in-out;
+                -moz-transition:all 0.5s ease-in-out;
+                -o-transition:all 0.5s ease-in-out;
+                -webkit-transition:all 0.5s ease-in-out;
+            }
+ 
+            a:hover {
+                transition:all 0.5s ease-in-out;
+                -moz-transition:all 0.5s ease-in-out;
+                -o-transition:all 0.5s ease-in-out;
+                -webkit-transition:all 0.5s ease-in-out;
+            }
+
             a img, img a {
                 margin:0;
                 padding:0;
                 border:none;
             }
+
             aside {
                 position:fixed;
                 left:15%;
@@ -22,6 +40,20 @@
 
             article small, article sub {
                 font-size:10px;
+            }
+            
+            body {
+                background-color:#fffafc;
+                background-image:url('https://assets.tumblr.com/images/x.gif?v=1');
+                background-attachment:fixed;
+                background-repeat:repeat;
+                cursor:default;
+                font-family:'Roboto', sans-serif;
+                font-size:10px;
+                line-height:1.1rem;
+                word-wrap:break-word;
+                -ms-text-size-adjust:100%;
+                -webkit-text-size-adjust:100%;
             }
 
             section {
@@ -68,13 +100,13 @@
             </nav>
         </aside>
 
-        <section>
+        <section class="top">
             <article>
                 <div class="border">
                 <p>Hi everyone! Welcome to my website. The main topic I'm going to be covering is Overwatch. Enjoy my site!</p>
                 </div>
                 <div class="info">
-                        <div class="box right"></div>tags: <a href="" title="general">#general </a> <a href="" title="intro">#intro </a>
+                        <div class="box right"></div>tags: <a href="/" title="general">#general </a> <a href="top" title="intro">#intro </a>
                 </div>
             </article>
         </section>
