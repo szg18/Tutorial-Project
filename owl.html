@@ -114,13 +114,58 @@
             }
         </style>
 
-        <script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src = "https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+    
         
+        <script type = "text/template" id="template">
+                <div class="card">
+                    <h3> {{description}} </h3>
+                    <p>1) {{choice1}} </p>
+                    <p>2) {{choice2}} </p>
+                 
+                    <input id="{{id}}" type = "text">
+                </div>
+        </script>
 
-
+        <script> 
+            var data;
+            function loadJSON(){
+                $.getJSON ("https://overwatchinformational.firebaseio.com/.json", function (results){
+                    data = results;
+                    displayData();
+                 
+                }
+        )
+            }
+            function displayData(){
+                var build = "";
+                var template = document.getElementById("template").innerHTML;
+                var output = document.getElementById("output");
+                for(var key in data.owl){
+                    build += Mustache.render(template,data.owl[key]);
+            }
+                output.innerHTML = build;
+        }
+    
+            function grade(){
+                var score = 0;
+                var out2 = document.getElementById("out2");
+                var build2 = "";
+                for (var i = 1; i <= 3; i++){
+                    var userAnswer = document.getElementById("Q" + i).value;
+                    var correctAnswer = data.owl["Q" + i].answer;
+                    if(userAnswer == correctAnswer){
+                        score++
+                    }
+    
+                } 
+                build += "Your score is " + score;
+                out2.innerHTML = build;
+            }
         </script>
     </head>
-    <body>
+    <body onload="loadJSON()">
         <aside>
             <img class="icon" src="images/586273b931349e0568ad89df.png" width="100%"/>
             <div class="space"></div>
@@ -154,6 +199,18 @@
                 </div>
                 <div class="info">
                         <div class="box right"></div>tags: <a href="/" title="owl">#overwatch league</a>
+                </div>
+            </article>
+        </section>
+            <section>
+            <article>
+                <div class="border">
+                    <div id="output"></div>
+                    <p><button onclick="grade()">Check</button></p>
+                    <p id="out2"></p>
+                </div>
+                <div class="info">
+                    <div class="box right"></div>tags: <a href="/" title="owl">#overwatch league</a> <a href="/" title="quiz">#quiz</a>
                 </div>
             </article>
         </section>
