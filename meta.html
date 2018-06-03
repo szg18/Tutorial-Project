@@ -3,7 +3,7 @@
         <title>Overwatch Information</title>
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
         <style>
-a {
+            a {
                 cursor:help;
                 text-decoration:none;
                 transition:all 0.5s ease-in-out;
@@ -114,11 +114,57 @@ a {
             }
         </style>
 
-        <script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src = "https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+    
         
+        <script type = "text/template" id="template">
+                <div class="card">
+                    <h3> {{description}} </h3>
+                    <p>1) {{choice1}} </p>
+                    <p>2) {{choice2}} </p>
+                 
+                    <input id="{{id}}" type = "text">
+                </div>
+        </script>
+
+        <script> 
+            var data;
+            function loadJSON(){
+                $.getJSON ("https://overwatchinformational.firebaseio.com/.json", function (results){
+                    data = results;
+                    displayData();
+                 
+                }
+        )
+            }
+            function displayData(){
+                var build = "";
+                var template = document.getElementById("template").innerHTML;
+                var output = document.getElementById("output");
+                for(var key in data.meta){
+                    build += Mustache.render(template,data.meta[key]);
+            }
+                output.innerHTML = build;
+        }
+    
+            function grade(){
+                var score = 0;
+                var out2 = document.getElementById("out2");
+                var build2 = "";
+                for (var i = 1; i <= 3; i++){
+                var userAnswer = document.getElementById(i).value;
+                var correctAnswer = data.meta["q" + i].answer;
+                if(userAnswer == correctAnswer){
+                    score++
+                }
+                }
+                build2 += "You scored a " + score + " out of 3.";
+                out2.innerHTML = build2;
+            }
         </script>
     </head>
-    <body>
+    <body onload="loadJSON()">
         <aside>
             <img class="icon" src="images/586273b931349e0568ad89df.png" width="100%"/>
             <div class="space"></div>
@@ -141,7 +187,7 @@ a {
                 <p>This is the section on optimal team compositions, known as the "meta"!</p>
                 </div>
                 <div class="info">
-                        <div class="box right"></div>tags:<a href="top" title="intro">#intro </a>
+                    <div class="box right"></div>tags: <a href="top" title="intro">#intro </a>
                 </div>
             </article>
         </section>
@@ -150,7 +196,21 @@ a {
                 <div class="border">
                     <p>The meta of a video game is known as the balance between heroes and which heroes are best to play in a competitive and professional environment Certain heroes being “buffed”(strengthened) over others or others being “nerfed”(weakened) promotes different kinds of metas where certain team compositions are more favorable over others.<br><br>Season 1 of Competitive Overwatch was defined by the end of rounds generally being determined by the coinflip sudden death. Before the hero limit was introduced, 2 Tracers 2 Winstons and 2 Lucios. Towards the end of season 1 and when the hero limit was introduced, Zenyatta was buffed and was very powerful. In season 2, having the key heroes of Zarya, Lucio, Ana, and Reaper defined the meta known as the “Beyblade” meta. Season 3 was known as the “Triple tank” meta, with three tanks, one of them being Reinhardt, and two to three supports, one of them being Ana.  Season 4 had a very brief Bastion-focused meta due to a temporary buff that made him a must pick. After that point, the meta was the “dive” meta, focused on heroes that could quickly move onto the objective and take down the enemy team. The standard dive consists of Tracer, Genji, D.Va, Winston, Lucio, and Zenyatta.<br><br>From that point on, there was always some variation of the dive. For seasons 6 through 8 Mercy got a rework that made her necessary in most team compositions. When the hero Moira was introduced, certain map structures made triple tank viable once more. Now, in Season 10, with the introduction of Brigitte and a rework of Hanzo, triple support has become very viable with Brigitte, a main healer, and a third healer. The tanks are usually Reinhardt and Zarya, due to the good synergy with Brigitte.</p>
                 </div>
+                <div class="info">
+                    <div class="box right"></div>tags: <a href="/" title="meta">#meta</a>
+                </div>
             </article>
-        </section>
-    </body>
-</html>
+            <section>
+                <article>
+                    <div class="border">
+                        <div id="output"></div>
+                        <p><button onclick="grade()">Check</button></p>
+                        <i><p id="out2"></p></i>
+                    </div>
+                    <div class="info">
+                        <div class="box right"></div>tags: <a href="/" title="owl">#meta</a> <a href="/" title="quiz">#quiz</a>
+                    </div>
+                </article>
+            </section>
+        </body>
+    </html>
