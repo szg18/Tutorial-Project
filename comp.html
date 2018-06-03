@@ -3,7 +3,7 @@
         <title>Overwatch Information</title>
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
         <style>
-a {
+            a {
                 cursor:help;
                 text-decoration:none;
                 transition:all 0.5s ease-in-out;
@@ -83,6 +83,10 @@ a {
             .cap blockquote blockquote {
                 margin-left:5px;
             }
+            .comp {
+                display: block;
+                margin: auto;
+            }
             .desc {
                 border-bottom:1px solid #EEEEEE;
                 margin-bottom:10px;
@@ -113,14 +117,58 @@ a {
                 text-transform:uppercase;
             }
         </style>
-        </style>
-        <script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src = "https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+    
         
+        <script type = "text/template" id="template">
+                <div class="card">
+                    <h3> {{description}} </h3>
+                    <p>1) {{choice1}} </p>
+                    <p>2) {{choice2}} </p>
+                 
+                    <input id="{{id}}" type = "text">
+                </div>
+        </script>
 
-
+        <script> 
+            var data;
+            function loadJSON(){
+                $.getJSON ("https://overwatchinformational.firebaseio.com/.json", function (results){
+                    data = results;
+                    displayData();
+                 
+                }
+        )
+            }
+            function displayData(){
+                var build = "";
+                var template = document.getElementById("template").innerHTML;
+                var output = document.getElementById("output");
+                for(var key in data.comp){
+                    build += Mustache.render(template,data.comp[key]);
+            }
+                output.innerHTML = build;
+        }
+    
+            function grade(){
+                var score = 0;
+                var out2 = document.getElementById("out2");
+                var build2 = "";
+                for (var i = 1; i <= 3; i++){
+                var userAnswer = document.getElementById(i).value;
+                var correctAnswer = data.comp["q" + i].answer;
+                if(userAnswer == correctAnswer){
+                    score++
+                }
+                }
+                build2 += "You scored a " + score + " out of 3.";
+                out2.innerHTML = build2;
+            }
         </script>
     </head>
-    <body>
+    <body onload="loadJSON()">
         <aside>
             <img class="icon" src="images/586273b931349e0568ad89df.png" width="100%"/>
             <div class="space"></div>
@@ -168,8 +216,21 @@ a {
                             <ul>
                                 <li>The icon for Grandmaster has a sparking effect and an anamorphic lens flare in the middle.</li>
                             </ul>
-                        <li>When a player leaves an ongoing Competitive match, the matchmaking system will not find a backfill for the match, forcing the remaining teammates to continue to play under the disadvantage. Players who leave an ongoing Competitive match will be marked as having lost the match, their skill rating will be decreased, and they will receive a 10-minute penalty (within 10 minutes they cannot join another Competitive match) if they did not have any infraction penalty in place.<br><br>Continued infractions will lead to more restrictions on future Competitive matches. As the violations start to pile up, Competitive Play will be locked for an increasing amount of time. Repeated violations can also result in a ban from Competitive Play for the current season, including the forfeit of any rewards.</li>
                     </ul>
+                    <br><br><img class="comp" src="images/Overwatch-Season-Rewards-2.jpg" width="80%"><br><br>
+                    When a player leaves an ongoing Competitive match, the matchmaking system will not find a backfill for the match, forcing the remaining teammates to continue to play under the disadvantage. Players who leave an ongoing Competitive match will be marked as having lost the match, their skill rating will be decreased, and they will receive a 10-minute penalty (within 10 minutes they cannot join another Competitive match) if they did not have any infraction penalty in place.<br><br>Continued infractions will lead to more restrictions on future Competitive matches. As the violations start to pile up, Competitive Play will be locked for an increasing amount of time. Repeated violations can also result in a ban from Competitive Play for the current season, including the forfeit of any rewards.
+                </div>
+            </article>
+        </section>
+        <section>
+            <article>
+                <div class="border">
+                    <div id="output"></div>
+                    <p><button onclick="grade()">Check</button></p>
+                    <i><p id="out2"></p></i>
+                </div>
+                <div class="info">
+                    <div class="box right"></div>tags: <a href="/" title="owl">#overwatch league</a> <a href="/" title="quiz">#quiz</a>
                 </div>
             </article>
         </section>
