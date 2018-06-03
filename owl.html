@@ -3,7 +3,7 @@
         <title>Overwatch Information</title>
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
         <style>
-            a {
+              a {
                 cursor:help;
                 text-decoration:none;
                 transition:all 0.5s ease-in-out;
@@ -103,6 +103,10 @@
                 display:block;
                 
             }
+            .owl {
+                display:block;
+                margin: auto;
+            }
             .title {
                 background-color:#bfbfbf;
                 color:#FFFFFF;
@@ -111,6 +115,10 @@
                 margin-top:-6px;
                 padding:5px 10px;
                 text-transform:uppercase;
+            }
+            #out2 {
+                font-size: 16px;
+                font-weight: bold;
             }
         </style>
 
@@ -153,15 +161,14 @@
                 var out2 = document.getElementById("out2");
                 var build2 = "";
                 for (var i = 1; i <= 3; i++){
-                    var userAnswer = document.getElementById("Q" + i).value;
-                    var correctAnswer = data.owl["Q" + i].answer;
-                    if(userAnswer == correctAnswer){
-                        score++
-                    }
-    
-                } 
-                build += "Your score is " + score;
-                out2.innerHTML = build;
+                var userAnswer = document.getElementById(i).value;
+                var correctAnswer = data.owl["q" + i].answer;
+                if(userAnswer == correctAnswer){
+                    score++
+                }
+                }
+                build2 += "You scored a " + score + " out of 3.";
+                out2.innerHTML = build2;
             }
         </script>
     </head>
@@ -195,19 +202,19 @@
         <section>
             <article>
                 <div class="border">
-                <p>The Overwatch League (abbreviated as OWL) is a professional eSports league for the video game Overwatch, developed and fully controlled by Blizzard Entertainment. The Overwatch League aims to follow the model of traditional North American professional sports, using a set of permanent teams and regular season play, rather than the use of promotion and relegation used commonly in other eSports leagues.<br>Each team franchise is backed by an owner, and players that are signed onto the team are assured a minimum annual salary, benefits, and a portion of winnings and revenue-sharing based on how that team performs in the season. The League was announced in November 2016, and the first twelve teams were established within a year from that. The first season started regular season play in January 2018, to run through June 2018, followed by post-season playoffs and an All-Star weekend to occur in July.<br><br>A total prize pool of US$3.5 million is available to teams within the first season. In its inaugural season, a series of pre-season games were played in December 2017, regular season games planned from January to June 2018, and then a playoff for the championship scheduled for July 2018. All games in the first season take place at the Blizzard Arena in Los Angeles.<br><br>In season 1, the main season is made up of four 5-week long stages, with three matches played four days a week (Wednesday through Saturday) and a ten-day break between stages. Each team will play 40 normal matches during the season; 20 against teams in their division, and 20 from outside their division. At the end of each stage is a playoff based on the teams' performances in that stage for a solitary winner of that stage for a prize of $125,000.<br><br>The post-season is based on teams' performance across all regular games across all stages of the season. The top team of each division get an automatic buy into the post-season, while the top four teams across both divisions have a play-off match before facing off in the semi-finals and finals. The winning team will receive $1 million, and with the total prize pool across all stages and finals totaling $3.5 million.</p>
+                <p><img class="owl" src="images/esports-overwatch-36d8f7f486d363c1 .png" width="50%"><br>The Overwatch League (abbreviated as OWL) is a professional eSports league for the video game Overwatch, developed and fully controlled by Blizzard Entertainment. The Overwatch League aims to follow the model of traditional North American professional sports, using a set of permanent teams and regular season play, rather than the use of promotion and relegation used commonly in other eSports leagues.<br><br>Each team franchise is backed by an owner, and players that are signed onto the team are assured a minimum annual salary, benefits, and a portion of winnings and revenue-sharing based on how that team performs in the season. The League was announced in November 2016, and the first twelve teams were established within a year from that. The first season started regular season play in January 2018, to run through June 2018, followed by post-season playoffs and an All-Star weekend to occur in July.<br><br><img class="owl" src="images/team-logos-9a5074f051d701b856633aa45f8877aecf5c2204fe2394280f7c60b9690e2f35e7684d5cf17c62a19a9ffaf7a28e13678d8900ad9dbfe8dfe677867374394013.png" width="50%"><br><br>A total prize pool of US$3.5 million is available to teams within the first season. In its inaugural season, a series of pre-season games were played in December 2017, regular season games planned from January to June 2018, and then a playoff for the championship scheduled for July 2018. All games in the first season take place at the Blizzard Arena in Los Angeles.<br><br>In season 1, the main season is made up of four 5-week long stages, with three matches played four days a week (Wednesday through Saturday) and a ten-day break between stages. Each team will play 40 normal matches during the season; 20 against teams in their division, and 20 from outside their division. At the end of each stage is a playoff based on the teams' performances in that stage for a solitary winner of that stage for a prize of $125,000.<br><br><img class="owl" src="images/Z4K43QPPNUJB1522452808842.JPG" width="70%"><br><br>The post-season is based on teams' performance across all regular games across all stages of the season. The top team of each division get an automatic buy into the post-season, while the top four teams across both divisions have a play-off match before facing off in the semi-finals and finals. The winning team will receive $1 million, and with the total prize pool across all stages and finals totaling $3.5 million.</p>
                 </div>
                 <div class="info">
                         <div class="box right"></div>tags: <a href="/" title="owl">#overwatch league</a>
                 </div>
             </article>
         </section>
-            <section>
+        <section>
             <article>
                 <div class="border">
                     <div id="output"></div>
                     <p><button onclick="grade()">Check</button></p>
-                    <p id="out2"></p>
+                    <i><p id="out2"></p></i>
                 </div>
                 <div class="info">
                     <div class="box right"></div>tags: <a href="/" title="owl">#overwatch league</a> <a href="/" title="quiz">#quiz</a>
