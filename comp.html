@@ -116,6 +116,10 @@
                 padding:5px 10px;
                 text-transform:uppercase;
             }
+            #out2 {
+                font-size: 16px;
+                font-weight: bold;
+            }
         </style>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -156,9 +160,11 @@
                 var score = 0;
                 var out2 = document.getElementById("out2");
                 var build2 = "";
-                for (var i = 1; i <= 3; i++){
+                for (var i = 4; i <= 6; i++){
+                var a = 1;
                 var userAnswer = document.getElementById(i).value;
-                var correctAnswer = data.comp["q" + i].answer;
+                var correctAnswer = data.comp["q" + a].answer;
+                a++;
                 if(userAnswer == correctAnswer){
                     score++
                 }
